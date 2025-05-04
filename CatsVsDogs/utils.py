@@ -80,4 +80,4 @@ def remove_exif_data(src_folder):
 
 
 # ** Run train test split on data here **
-train_test_split('Dataset/PetImages/')
+# train_test_split('Dataset/PetImages/')
