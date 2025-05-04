@@ -36,22 +36,22 @@ def train_test_split(src_folder):
 	for img in train_cats:
 		src = os.path.join(cat_dir, img)
 		dst = os.path.join(train_cat_dir, img)
-		os.system(f'cp "{src}" "{dst}"')
+		os.system(f'copy "{src}" "{dst}"')
 
 	for img in test_cats:
 		src = os.path.join(cat_dir, img)
 		dst = os.path.join(train_cat_dir, img)
-		os.system(f'cp "{src}" "{dst}"')
+		os.system(f'copy "{src}" "{dst}"')
 	
 	for img in train_dogs:
 		src = os.path.join(dog_dir, img)
 		dst = os.path.join(train_dog_dir, img)
-		os.system(f'cp "{src}" "{dst}"')
+		os.system(f'copy "{src}" "{dst}"')
 
 	for img in test_dogs:
 		src = os.path.join(cat_dir, img)
 		dst = os.path.join(train_cat_dir, img)
-		os.system(f'cp "{src}" "{dst}"')
+		os.system(f'copy "{src}" "{dst}"')
 
 	print(f"Dataset split complete:")
 	print(f"Training cats: {len(train_cats)}")
