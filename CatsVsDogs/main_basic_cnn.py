@@ -26,7 +26,8 @@ numOfFilters = 32
 inputSize = (150,150,3) #every image will be resized to 150x150 pixels, and it will have 3 color channels aka rgb
 poolingSize = (2,2)
 batchSize = 32
-stepsPerEpoch = 20000 // batchSize #typically the number of training samples divided by batch size
+train_sample_size = 20000 # entire dataset contains 19997 training images
+test_sample_size = 5000 # entire dataset contains 5000 testing images
 epochs = 10
 
 model = Sequential()
@@ -63,7 +64,7 @@ training_gen = train_img_gen.flow_from_directory(
 )
 model.fit_generator(
     generator=training_gen,
-    steps_per_epoch=stepsPerEpoch,
+    steps_per_epoch=train_sample_size // batchSize,
     epochs=epochs
 )
 
@@ -78,7 +79,7 @@ testing_gen = test_img_gen.flow_from_directory(
 )
 [loss, accuracy] = model.evaluate_generator(
     generator=testing_gen,
-    steps=stepsPerEpoch
+    steps=test_sample_size // batchSize
 )
 
 print("Loss: " + str(loss))
