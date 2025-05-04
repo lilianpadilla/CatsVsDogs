@@ -1,5 +1,4 @@
 import os
-import random
 import piexif
 
 def train_test_split(src_folder):
@@ -40,7 +39,7 @@ def train_test_split(src_folder):
 
 	for img in test_cats:
 		src = os.path.join(cat_dir, img)
-		dst = os.path.join(train_cat_dir, img)
+		dst = os.path.join(test_cat_dir, img)
 		os.system(f'cp "{src}" "{dst}"')
 	
 	for img in train_dogs:
@@ -49,8 +48,8 @@ def train_test_split(src_folder):
 		os.system(f'cp "{src}" "{dst}"')
 
 	for img in test_dogs:
-		src = os.path.join(cat_dir, img)
-		dst = os.path.join(train_cat_dir, img)
+		src = os.path.join(dog_dir, img)
+		dst = os.path.join(test_dog_dir, img)
 		os.system(f'cp "{src}" "{dst}"')
 
 	print(f"Dataset split complete:")
