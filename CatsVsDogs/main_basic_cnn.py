@@ -23,11 +23,11 @@ start_time = time.time()
 
 filterSize = (3,3) 
 numOfFilters = 32
-inputSize = (150,150,3) #every image will be resized to 150x150 pixels, and it will have 3 color channels aka rgb
+inputSize = (150,150,3) # every image will be resized to this size, and it will have 3 color channels aka rgb
 poolingSize = (2,2)
 batchSize = 32
-train_sample_size = 20000 # entire dataset contains 19997 training images
-test_sample_size = 5000 # entire dataset contains 5000 testing images
+train_sample_size = 19997 # entire dataset contains 19997 training images
+test_sample_size = 4992 # entire dataset contains 5000 testing images
 epochs = 10
 
 model = Sequential()
@@ -37,12 +37,12 @@ model = Sequential()
 #with either the same or more filters than the last layer.
 
 model.add((Conv2D(numOfFilters,filterSize, activation='relu',input_shape = inputSize)))
-#model.add(BatchNormalization()) could be used to optimize
+# model.add(BatchNormalization()) # could be used to optimize
 model.add((MaxPooling2D(pool_size=poolingSize,strides=2)))
 
 
 model.add((Conv2D(numOfFilters*2,filterSize, activation='relu')))
-#model.add(BatchNormalization()) could be used to optimize
+# model.add(BatchNormalization()) # could be used to optimize
 model.add(MaxPooling2D(pool_size=poolingSize))
 
 
@@ -60,12 +60,14 @@ training_gen = train_img_gen.flow_from_directory(
     directory="./CatsVsDogs/Dataset/PetImages/Train",
     batch_size=batchSize,
     target_size=(inputSize[0], inputSize[1]),
-    class_mode="binary"
+    class_mode="binary",
+    shuffle=True
 )
 model.fit_generator(
     generator=training_gen,
     steps_per_epoch=train_sample_size // batchSize,
-    epochs=epochs
+    epochs=epochs,
+    shuffle=True
 )
 
 # Takes in the images from Dataset/PetImages/Test and evaluates
@@ -75,7 +77,8 @@ testing_gen = test_img_gen.flow_from_directory(
     directory="./CatsVsDogs/Dataset/PetImages/Test",
     batch_size=batchSize,
     target_size=(inputSize[0], inputSize[1]),
-    class_mode="binary"
+    class_mode="binary",
+    shuffle=True
 )
 [loss, accuracy] = model.evaluate_generator(
     generator=testing_gen,
