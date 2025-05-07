@@ -26,7 +26,7 @@ numOfFilters = 24
 inputSize = (150,150,3) # every image will be resized to this size, and it will have 3 color channels aka rgb
 poolingSize = (2,2)
 batchSize = 64
-epochs = 12
+epochs = 25
 
 model = Sequential()
 
@@ -37,23 +37,23 @@ model = Sequential()
 model.add((Conv2D(numOfFilters,filterSize, activation='relu',input_shape = inputSize)))
 # model.add(BatchNormalization()) # could be used to optimize
 model.add((MaxPooling2D(pool_size=poolingSize,strides=2)))
-Dropout(0.2)
+# Dropout(0.2)
 
 
 model.add((Conv2D(numOfFilters*2,filterSize, activation='relu')))
 # model.add(BatchNormalization()) # could be used to optimize
 model.add(MaxPooling2D(pool_size=poolingSize))
-Dropout(0.2)
+# Dropout(0.2)
 
 
 model.add((Conv2D(numOfFilters*4,filterSize, activation='relu')))
 # model.add(BatchNormalization()) # could be used to optimize
 model.add(MaxPooling2D(pool_size=poolingSize))
-Dropout(0.2)
+# Dropout(0.2)
 
 model.add(Flatten())
 model.add(Dense(128, activation='relu'))
-Dropout(0.5)
+# Dropout(0.5)
 model.add(Dense(1, activation='sigmoid')) #pdf says to use sigmoid for the classification
 #if model overfits during training, consider using dropout 
 
