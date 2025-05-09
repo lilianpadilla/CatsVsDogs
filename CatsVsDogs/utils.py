@@ -23,14 +23,14 @@ def train_test_split(src_folder):
 	cat_images = [img for img in os.listdir(cat_dir) if img not in bad_files_cat]
 	dog_images = [img for img in os.listdir(dog_dir) if img not in bad_files_dog]
 	
-	split_idx_cat = int(len(cat_images) * 0.8)
-	split_idx_dog = int(len(dog_images) * 0.8)
+	split_cat = int(len(cat_images) * 0.8)
+	split_dog = int(len(dog_images) * 0.8)
 
-	train_cats = cat_images[:split_idx_cat]
-	test_cats = cat_images[split_idx_cat:]
+	train_cats = cat_images[:split_cat]
+	test_cats = cat_images[split_cat:]
     
-	train_dogs = dog_images[:split_idx_dog]
-	test_dogs = dog_images[split_idx_dog:]
+	train_dogs = dog_images[:split_dog]
+	test_dogs = dog_images[split_dog:]
 	
 	for img in train_cats:
 		src = os.path.join(cat_dir, img)
