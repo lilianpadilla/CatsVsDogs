@@ -52,12 +52,6 @@ def train_test_split(src_folder):
 		dst = os.path.join(test_dog_dir, img)
 		os.system(f'copy "{src}" "{dst}"')
 
-	print(f"Dataset split complete:")
-	print(f"Training cats: {len(train_cats)}")
-	print(f"Testing cats: {len(test_cats)}")
-	print(f"Training dogs: {len(train_dogs)}")
-	print(f"Testing dogs: {len(test_dogs)}")
-
 	# remove corrupted exif data from the dataset
 	remove_exif_data(src_folder+'Train/')
 	remove_exif_data(src_folder+'Test/')
